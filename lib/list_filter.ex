@@ -1,18 +1,11 @@
 defmodule ListFilter do
-  @moduledoc """
-  Documentation for `ListFilter`.
-  """
+  require Integer
 
-  @doc """
-  Hello world.
-
-  ## Examples
-
-      iex> ListFilter.hello()
-      :world
-
-  """
-  def hello do
-    :world
+  def call(list) do
+    list
+    |> Enum.map(&Integer.parse(&1))
+    |> Enum.filter(fn elem -> is_tuple(elem) end)
+    |> Enum.filter(fn {int, _dec} -> Integer.is_odd(int) end)
+    |> Enum.count()
   end
 end
